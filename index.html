@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>LOTTO</title>
+</head>
+<style>
+  td {
+    width: 130px;
+    text-align: center;
+    border: 1px solid black;
+  }
+
+  table {
+    border: 1px solid black;
+    margin-bottom: 10px;
+  }
+
+  .boom {
+    background-color: rgba(76, 76, 219, 0.295);
+  }
+
+  .super {
+    background-color: rgba(172, 29, 18, 0.555);
+  }
+
+  .s_width>tbody>tr>td {
+    width: 40px;
+    text-align: center;
+    background-color: bisque;
+  }
+
+  p {
+    display: inline;
+  }
+
+  .red_color {
+    background-color: rgba(255, 0, 0, 0.534);
+  }
+
+  .yellow_color {
+    background-color: rgba(255, 255, 0, 0.39);
+  }
+</style>
+<script type="text/javascript">
+  var xmlhttp = new XMLHttpRequest();
+  var url = "lo_db.json";
+
+  xmlhttp.onreadystatechange = function () {
+    if (this.readyState == 4 && this.status == 200) {
+      myfunc(xmlhttp.responseText);
+    }
+  };
+  xmlhttp.open("GET", url, true);
+  xmlhttp.send();
+
+  var cnt = new Array();
+  for (var i = 1; i <= 45; i++) {
+    cnt[i] = 0;
+  }
+
+  function myfunc(resp) {
+    var arr = JSON.parse(resp);
+    var out = "<table>";
+    out += "<tr>"
+      + "<td style='width:50px;'>회차</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>번호</td>"
+      + "<td style='width:40px;'>Bonus</td>"
+      + "<td>1등 금액</td>"
+      + "<td>1등 당첨자수</td>"
+      + "<td>2등 금액</td>"
+      + "<td>2등 당첨자수</td>"
+      + "<td>날짜</td>"
+      + "</tr>"
+
+    for (var i = 0; i < arr.length; i++) {
+      if (arr[i].prize1 > 2500000000 && arr[i].prize1 < 4500000000) {
+        out +=
+          "<tr class='boom'>" +
+          "<td style='width:50px;'>" + arr[i].round + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num1 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num2 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num3 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num4 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].numB + "</td>" +
+          "<td>" + arr[i].prize1 + "원</td>" +
+          "<td>" + arr[i].prize1cnt + "</td>" +
+          "<td>" + arr[i].prize2 + "원</td>" +
+          "<td>" + arr[i].prize2cnt + "</td>" +
+          "<td>" + arr[i].date + "</td>" +
+          "</tr>";
+      }
+      else if (arr[i].prize1 > 4500000000) {
+        out +=
+          "<tr class='super'>" +
+          "<td style='width:50px;'>" + arr[i].round + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num1 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num2 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num3 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num4 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].numB + "</td>" +
+          "<td>" + arr[i].prize1 + "원</td>" +
+          "<td>" + arr[i].prize1cnt + "</td>" +
+          "<td>" + arr[i].prize2 + "원</td>" +
+          "<td>" + arr[i].prize2cnt + "</td>" +
+          "<td>" + arr[i].date + "</td>" +
+          "</tr>";
+      }
+      else {
+        out +=
+          "<tr>" +
+          "<td style='width:50px;'>" + arr[i].round + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num1 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num2 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num3 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num4 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
+          "<td style='width:40px;'>" + arr[i].numB + "</td>" +
+          "<td>" + arr[i].prize1 + "원</td>" +
+          "<td>" + arr[i].prize1cnt + "</td>" +
+          "<td>" + arr[i].prize2 + "원</td>" +
+          "<td>" + arr[i].prize2cnt + "</td>" +
+          "<td>" + arr[i].date + "</td>" +
+          "</tr>";
+      }
+
+      cnt[arr[i].num1]++;
+      cnt[arr[i].num2]++;
+      cnt[arr[i].num3]++;
+      cnt[arr[i].num4]++;
+      cnt[arr[i].num5]++;
+      cnt[arr[i].num6]++;
+    }
+    document.getElementById('demo').innerHTML = out;
+    var average = 0;
+    var special = 0;
+    var spe_cnt = 0;
+
+    for (var i = 1; i <= 45; i++) {
+      average += cnt[i];
+    }
+
+    average /= 45;
+
+    var t;
+    for (var i = 1; i <= 45; i++) {
+
+      if (cnt[i] > average) {
+        special += cnt[i];
+        spe_cnt++;
+        t += "<p class='red_color'>" + i + "의 횟수는" + cnt[i] + "번 입니다. </p>"
+      } else {
+        t += "<p>" + i + "의 횟수는" + cnt[i] + "번 입니다. </p>"
+      }
+      if (i % 8 == 0) {
+        t += "<br>";
+      }
+    }
+
+    var s = "많이 나온 번호 : ";
+
+    special /= spe_cnt;
+    for (var i = 1; i <= 45; i++) {
+      if (cnt[i] > special) {
+        s += "<p class='yellow_color'>" + i + "번 </p>"
+      }
+    }
+
+    document.getElementById('spe').innerHTML = s;
+    document.getElementById('temp').innerHTML = t;
+
+    var s = "많이 나온 번호 : ";
+
+    special /= spe_cnt;
+    for (var i = 1; i <= 45; i++) {
+      if (cnt[i] > special) {
+        s += "<p class='yellow_color'>" + i + "번 </p>"
+      }
+    }
+
+    document.getElementById('spe').innerHTML = s;
+    document.getElementById('temp').innerHTML = t;
+  }
+
+  function random() {
+    var lotto = [];
+    var op_cnt = 0;
+
+    var op_1_val = document.getElementById('op_1').value;
+    var op_2_val = document.getElementById('op_2').value;
+    var op_3_val = document.getElementById('op_3').value;
+    var op_4_val = document.getElementById('op_4').value;
+    var op_5_val = document.getElementById('op_5').value;
+
+    if (op_1_val > 0 && op_1_val <= 45) {
+      lotto[op_cnt] = op_1_val;
+      op_cnt++;
+    }
+    if (op_2_val > 0 && op_2_val <= 45) {
+      lotto[op_cnt] = op_2_val;
+      op_cnt++;
+    }
+    if (op_3_val > 0 && op_3_val <= 45) {
+      lotto[op_cnt] = op_3_val;
+      op_cnt++;
+    }
+    if (op_4_val > 0 && op_4_val <= 45) {
+      lotto[op_cnt] = op_4_val;
+      op_cnt++;
+    }
+    if (op_5_val > 0 && op_5_val <= 45) {
+      lotto[op_cnt] = op_5_val;
+      op_cnt++;
+    }
+
+    for (var i = op_cnt; i < 6; i++) {
+      var num = Math.floor(Math.random() * 44) + 1;
+      for (var j in lotto) {
+        if (num == lotto[j]) {
+          num = Math.floor(Math.random() * 44) + 1;
+        }
+      }
+      lotto.push(num);
+    }
+    var l = "추천 번호 ";
+
+    for (var i = 0; i < 6; i++) {
+      l += "<p class='yellow_color'>" + lotto[i] + " </p>";
+    }
+    document.getElementById('random').innerHTML = l;
+  }
+</script>
+
+<body>
+  <table class="s_width">
+    <tr>
+      <td>1</td>
+      <td>2</td>
+      <td>3</td>
+      <td>4</td>
+      <td>5</td>
+      <td>6</td>
+      <td>7</td>
+      <td>8</td>
+      <td>9</td>
+      <td>10</td>
+      <td>11</td>
+      <td>12</td>
+      <td>13</td>
+      <td>14</td>
+      <td>15</td>
+      <td>16</td>
+      <td>17</td>
+      <td>18</td>
+      <td>19</td>
+      <td>20</td>
+    </tr>
+    <tr id="first_line">
+
+    </tr>
+  </table>
+  <table class="s_width">
+    <tr>
+      <td>21</td>
+      <td>22</td>
+      <td>23</td>
+      <td>24</td>
+      <td>25</td>
+      <td>26</td>
+      <td>27</td>
+      <td>28</td>
+      <td>29</td>
+      <td>30</td>
+      <td>31</td>
+      <td>32</td>
+      <td>33</td>
+      <td>34</td>
+      <td>35</td>
+      <td>36</td>
+      <td>37</td>
+      <td>38</td>
+      <td>39</td>
+      <td>40</td>
+    </tr>
+    <tr id="second_line">
+
+    </tr>
+  </table>
+  <table class="s_width">
+    <tr>
+      <td>41</td>
+      <td>42</td>
+      <td>43</td>
+      <td>44</td>
+      <td>45</td>
+    </tr>
+    <tr id="third_line">
+
+    </tr>
+  </table>
+  <div id="random" style="margin-bottom: 20px;">
+    <p>추천 번호 </p>
+  </div>
+  <div style="margin-bottom: 20px;">
+    <input id="op_1" style="width: 30px; height: 20px;">
+    <input id="op_2" style="width: 30px; height: 20px;">
+    <input id="op_3" style="width: 30px; height: 20px;">
+    <input id="op_4" style="width: 30px; height: 20px;">
+    <input id="op_5" style="width: 30px; height: 20px;">
+    <button onclick="random()">번호 추출</button>
+  </div>
+  <p id="demo"></p>
+</body>
+
+</html>
