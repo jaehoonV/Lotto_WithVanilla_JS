@@ -130,6 +130,7 @@ p {
    width: 15rem;
    margin: 0px auto;
    font-size: 1.5rem;
+   text-align: center;
 }
 
 .ball {
@@ -265,4 +266,23 @@ p {
 
 .selectBox .optionItem:last-child {
    border-bottom: 0 none;
+}
+
+@media (max-width: 420px) {
+   #machine {
+      width: 24rem;
+   }
+
+   #random {
+      width: 23rem;
+      font-size: 1.5rem;
+   }
+
+   #num_machine {
+      width: 19rem;
+   }
+
+   .button_css {
+      margin: 1rem;
+   }
 }
