@@ -12,6 +12,11 @@ xmlhttp.send();
 var cnt = new Array();
 var bonus_cnt = new Array();
 var all_cnt = new Array();
+
+// 옵션에 사용할 Array
+var all_arr = new Array();
+var special_arr = new Array();
+
 for (var i = 1; i <= 45; i++) {
    cnt[i] = 0;
    bonus_cnt[i] = 0;
@@ -138,6 +143,7 @@ function myfunc(resp) {
    var bonus_avge = "평균보다 많이 나온 보너스 번호 : ";
    for (var i = 1; i <= 45; i++) {
       if (all_cnt[i] > all_average) {
+         all_arr.push(i);
          all_special += all_cnt[i];
          all_spe_cnt++;
          avge_h.push(i);
@@ -157,7 +163,6 @@ function myfunc(resp) {
             all_avge += "<input class='ball50 ball' value='" + i + "'disabled>"
             all_p += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
          }
-
       } else {
          if (i <= 10) {
             all_p += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
@@ -172,9 +177,9 @@ function myfunc(resp) {
          }
       }
       if (cnt[i] > average) {
+         special_arr.push(i);
          special += cnt[i];
          spe_cnt++;
-
          if (i <= 10) {
             avge += "<input class='ball10 ball' value='" + i + "'disabled>";
             t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
@@ -191,7 +196,6 @@ function myfunc(resp) {
             avge += "<input class='ball50 ball' value='" + i + "'disabled>"
             t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
          }
-
       } else {
          if (i <= 10) {
             t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
@@ -267,35 +271,76 @@ function myfunc(resp) {
    document.getElementById('temp').innerHTML = t;
 }
 
+// 번호 추출
 function random() {
    const select_op_val = document.getElementById('op_value').value;
    var lotto = [];
    var op_cnt = 0;
    var temp;
-   for (var i = 0; i < 5; i++) {
+
+   // 번호 입력 처리
+   For1: for (var i = 0; i < 5; i++) {
       temp = document.getElementsByClassName("op_val")[i].value;
+      if (op_cnt > 0) {
+         for (var j in lotto) {
+            if (temp == lotto[j]) {
+               continue For1;
+            }
+         }
+      }
       if (temp > 0 && temp <= 45) {
          lotto[op_cnt] = temp;
          op_cnt++;
       }
    }
 
-   for (var i = op_cnt; i < 6; i++) {
-      var num = Math.floor(Math.random() * 44) + 1;
-      for (var j in lotto) {
-         if (num == lotto[j]) {
-            num = Math.floor(Math.random() * 44) + 1;
+   switch (select_op_val) {
+      case "0": // 랜덤 추출
+         console.log("랜덤 추출")
+         for (var i = op_cnt; i < 6; i++) {
+            var num = Math.floor(Math.random() * 44) + 1;
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = Math.floor(Math.random() * 44) + 1;
+               }
+            }
+            lotto.push(num);
          }
-      }
-      lotto.push(num);
+         break;
+      case "1": // 평균보다 많이 나온 번호
+         console.log("평균보다 많이 나온 번호" + all_arr)
+         for (var i = op_cnt; i < 6; i++) {
+            var num = all_arr[Math.floor(Math.random() * all_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = all_arr[Math.floor(Math.random() * all_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "2": // 평균보다 많이 나온 번호(보너스 X)
+         console.log("평균보다 많이 나온 번호(보너스 X)")
+         for (var i = op_cnt; i < 6; i++) {
+            var num = special_arr[Math.floor(Math.random() * special_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = special_arr[Math.floor(Math.random() * special_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
    }
 
+
+   // 정렬
    lotto.sort(function (a, b) {
       return a - b;
    });
 
+   // 출력
    var l = "";
-
    for (var i = 0; i < 6; i++) {
       if (i == 5) {
          l += lotto[i];
