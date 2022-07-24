@@ -16,6 +16,8 @@ var all_cnt = new Array();
 // 옵션에 사용할 Array
 var all_arr = new Array();
 var special_arr = new Array();
+var s_all_special_arr = new Array();
+var s_special_arr = new Array();
 
 for (var i = 1; i <= 45; i++) {
    cnt[i] = 0;
@@ -235,6 +237,7 @@ function myfunc(resp) {
    special /= spe_cnt;
    for (var i = 1; i <= 45; i++) {
       if (all_cnt[i] > all_special) {
+         s_all_special_arr.push(i);
          if (i <= 10) {
             all_s += "<input class='ball10 ball' value='" + i + "'disabled>"
          } else if (i <= 20) {
@@ -248,6 +251,7 @@ function myfunc(resp) {
          }
       }
       if (cnt[i] > special) {
+         s_special_arr.push(i);
          if (i <= 10) {
             s += "<input class='ball10 ball' value='" + i + "'disabled>"
          } else if (i <= 20) {
@@ -296,7 +300,6 @@ function random() {
 
    switch (select_op_val) {
       case "0": // 랜덤 추출
-         console.log("랜덤 추출")
          for (var i = op_cnt; i < 6; i++) {
             var num = Math.floor(Math.random() * 44) + 1;
             for (var j in lotto) {
@@ -308,7 +311,6 @@ function random() {
          }
          break;
       case "1": // 평균보다 많이 나온 번호
-         console.log("평균보다 많이 나온 번호" + all_arr)
          for (var i = op_cnt; i < 6; i++) {
             var num = all_arr[Math.floor(Math.random() * all_arr.length)];
             for (var j in lotto) {
@@ -320,12 +322,33 @@ function random() {
          }
          break;
       case "2": // 평균보다 많이 나온 번호(보너스 X)
-         console.log("평균보다 많이 나온 번호(보너스 X)")
          for (var i = op_cnt; i < 6; i++) {
             var num = special_arr[Math.floor(Math.random() * special_arr.length)];
             for (var j in lotto) {
                if (num == lotto[j]) {
                   num = special_arr[Math.floor(Math.random() * special_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "3": // 많이 나온 번호
+         for (var i = op_cnt; i < 6; i++) {
+            var num = s_all_special_arr[Math.floor(Math.random() * s_all_special_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = s_all_special_arr[Math.floor(Math.random() * s_all_special_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "4": // 많이 나온 번호(보너스 X)
+         for (var i = op_cnt; i < 6; i++) {
+            var num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
                }
             }
             lotto.push(num);
