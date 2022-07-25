@@ -1,3 +1,4 @@
+@charset "UTF-8";
 @import url('https://fonts.googleapis.com/css2?family=Noto+Sans+KR&display=swap');
 
 :root {
@@ -14,14 +15,11 @@
 input, button {
    /* Safari, Firefox and Chrome */
    -webkit-appearance: none;
+   -webkit-border-radius: 0;
    appearance: none;
    border: none;
    border-radius: 0;
-   appearance: none;
    -moz-appearance: none;
-   -webkit-appearance: none;
-   border-radius: 0;
-   -webkit-border-radius: 0;
    -moz-border-radius: 0;
 }
 
