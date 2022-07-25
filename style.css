@@ -11,6 +11,14 @@
    --ball50: #b0d840;
 }
 
+html, input, table, p, div, button {
+   /* Firefox */
+   -moz-appearance: none;
+   /* Safari and Chrome */
+   -webkit-appearance: none;
+
+}
+
 td {
    width: 130px;
    text-align: center;
@@ -284,5 +292,13 @@ p {
 
    .button_css {
       margin: 1rem;
+   }
+
+   td {
+      font-size: xx-small;
+   }
+
+   .ml_10 {
+      font-size: 0.8rem;
    }
 }

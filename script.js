@@ -14,10 +14,12 @@ var bonus_cnt = new Array();
 var all_cnt = new Array();
 
 // 옵션에 사용할 Array
-var all_arr = new Array();
-var special_arr = new Array();
-var s_all_special_arr = new Array();
-var s_special_arr = new Array();
+var all_arr = new Array(); //평균보다 많이 나온 번호
+var special_arr = new Array(); // 평균보다 많이 나온 번호(보너스 X)
+var s_all_special_arr = new Array(); // 많이 나온 번호
+var s_special_arr = new Array(); // 많이 나온 번호(보너스 X)
+var b_all_arr = new Array(); // 평균보다 적게 나온 번호
+var bs_all_arr = new Array(); // 평균보다 적게 나온 번호 (보너스 X)
 
 for (var i = 1; i <= 45; i++) {
    cnt[i] = 0;
@@ -56,9 +58,9 @@ function myfunc(resp) {
             "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
             "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
             "<td style='width:40px;'>" + arr[i].numB + "</td>" +
-            "<td>" + arr[i].prize1 + "원</td>" +
+            "<td>" + arr[i].prize1.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize1cnt + "</td>" +
-            "<td>" + arr[i].prize2 + "원</td>" +
+            "<td>" + arr[i].prize2.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize2cnt + "</td>" +
             "<td>" + arr[i].date + "</td>" +
             "</tr>";
@@ -74,9 +76,9 @@ function myfunc(resp) {
             "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
             "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
             "<td style='width:40px;'>" + arr[i].numB + "</td>" +
-            "<td>" + arr[i].prize1 + "원</td>" +
+            "<td>" + arr[i].prize1.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize1cnt + "</td>" +
-            "<td>" + arr[i].prize2 + "원</td>" +
+            "<td>" + arr[i].prize2.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize2cnt + "</td>" +
             "<td>" + arr[i].date + "</td>" +
             "</tr>";
@@ -92,9 +94,9 @@ function myfunc(resp) {
             "<td style='width:40px;'>" + arr[i].num5 + "</td>" +
             "<td style='width:40px;'>" + arr[i].num6 + "</td>" +
             "<td style='width:40px;'>" + arr[i].numB + "</td>" +
-            "<td>" + arr[i].prize1 + "원</td>" +
+            "<td>" + arr[i].prize1.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize1cnt + "</td>" +
-            "<td>" + arr[i].prize2 + "원</td>" +
+            "<td>" + arr[i].prize2.toLocaleString() + "</td>" +
             "<td>" + arr[i].prize2cnt + "</td>" +
             "<td>" + arr[i].date + "</td>" +
             "</tr>";
@@ -136,8 +138,8 @@ function myfunc(resp) {
    average /= 45;
    bonus_average /= 45;
 
-   var all_p = "<p style='font-size: 1.3rem'>보너스 번호 포함</p><br>";
-   var t = "<p style='font-size: 1.3rem'>보너스 번호 제외</p><br>";
+   var all_p = "<p style='font-size: 1.3rem'>보너스 번호 포함 횟수</p><br>";
+   var t = "<p style='font-size: 1.3rem'>보너스 번호 제외 횟수</p><br>";
    var all_avge = "평균보다 많이 나온 번호 : ";
 
    var avge_h = [];
@@ -166,6 +168,7 @@ function myfunc(resp) {
             all_p += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
          }
       } else {
+         b_all_arr.push(i);
          if (i <= 10) {
             all_p += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
          } else if (i <= 20) {
@@ -199,6 +202,7 @@ function myfunc(resp) {
             t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
          }
       } else {
+         bs_all_arr.push(i);
          if (i <= 10) {
             t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
          } else if (i <= 20) {
@@ -349,6 +353,28 @@ function random() {
             for (var j in lotto) {
                if (num == lotto[j]) {
                   num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "5": // 평균보다 적게 나온 번호
+         for (var i = op_cnt; i < 6; i++) {
+            var num = b_all_arr[Math.floor(Math.random() * b_all_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = b_all_arr[Math.floor(Math.random() * b_all_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "6": // 평균보다 적게 나온 번호(보너스 X)
+         for (var i = op_cnt; i < 6; i++) {
+            var num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
                }
             }
             lotto.push(num);
