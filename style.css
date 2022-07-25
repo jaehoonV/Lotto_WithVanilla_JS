@@ -11,12 +11,18 @@
    --ball50: #b0d840;
 }
 
-html, input, table, p, div, button {
-   /* Firefox */
-   -moz-appearance: none;
-   /* Safari and Chrome */
+input, button {
+   /* Safari, Firefox and Chrome */
    -webkit-appearance: none;
-
+   appearance: none;
+   border: none;
+   border-radius: 0;
+   appearance: none;
+   -moz-appearance: none;
+   -webkit-appearance: none;
+   border-radius: 0;
+   -webkit-border-radius: 0;
+   -moz-border-radius: 0;
 }
 
 td {
