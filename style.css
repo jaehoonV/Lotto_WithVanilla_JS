@@ -12,6 +12,25 @@
    --ball50: #b0d840;
 }
 
+html::-webkit-scrollbar {
+   width: 9px;
+}
+
+html::-webkit-scrollbar-button {
+   height: 30px;
+}
+
+html::-webkit-scrollbar-thumb {
+   background: #999;
+   border: 1px solid #999;
+   border-radius: 50px;
+}
+
+html::-webkit-scrollbar-track {
+   background: transparent;
+   border-radius: 50px;
+}
+
 input, button {
    /* Safari, Firefox and Chrome */
    -webkit-appearance: none;

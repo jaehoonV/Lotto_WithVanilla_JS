@@ -20,6 +20,8 @@ var s_all_special_arr = new Array(); // 많이 나온 번호
 var s_special_arr = new Array(); // 많이 나온 번호(보너스 X)
 var b_all_arr = new Array(); // 평균보다 적게 나온 번호
 var bs_all_arr = new Array(); // 평균보다 적게 나온 번호 (보너스 X)
+var s_b_all_arr = new Array(); // 적게 나온 번호
+var s_bs_all_arr = new Array(); // 적게 나온 번호 (보너스 X)
 
 for (var i = 1; i <= 45; i++) {
    cnt[i] = 0;
@@ -127,6 +129,11 @@ function myfunc(resp) {
    var special = 0;
    var spe_cnt = 0;
 
+   var b_average = 0; // 적게 나온 평균
+   var bs_average = 0; // 적게 나온 평균(보너스 X)
+   var b_all_cnt = 0; // 적게 나온 횟수
+   var bs_all_cnt = 0; // 적게 나온 횟수(보너스 X)
+
    for (var i = 1; i <= 45; i++) {
       all_average += cnt[i] + bonus_cnt[i];
       average += cnt[i];
@@ -169,6 +176,8 @@ function myfunc(resp) {
          }
       } else {
          b_all_arr.push(i);
+         b_average += all_cnt[i];
+         b_all_cnt++;
          if (i <= 10) {
             all_p += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
          } else if (i <= 20) {
@@ -187,32 +196,34 @@ function myfunc(resp) {
          spe_cnt++;
          if (i <= 10) {
             avge += "<input class='ball10 ball' value='" + i + "'disabled>";
-            t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 20) {
             avge += "<input class='ball20 ball' value='" + i + "'disabled>"
-            t += "<input class='ball20 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball20 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 30) {
             avge += "<input class='ball30 ball' value='" + i + "'disabled>"
-            t += "<input class='ball30 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball30 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 40) {
             avge += "<input class='ball40 ball' value='" + i + "'disabled>"
-            t += "<input class='ball40 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball40 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + cnt[i] + "번</p>";
          } else {
             avge += "<input class='ball50 ball' value='" + i + "'disabled>"
-            t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='red_color ml_10'>" + cnt[i] + "번</p>";
          }
       } else {
          bs_all_arr.push(i);
+         bs_average += cnt[i];
+         bs_all_cnt++;
          if (i <= 10) {
-            t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball10 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 20) {
-            t += "<input class='ball20 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball20 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 30) {
-            t += "<input class='ball30 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball30 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          } else if (i <= 40) {
-            t += "<input class='ball40 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball40 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          } else {
-            t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + all_cnt[i] + "번</p>";
+            t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          }
       }
       if (i % 9 == 0) {
@@ -239,6 +250,10 @@ function myfunc(resp) {
 
    all_special /= all_spe_cnt;
    special /= spe_cnt;
+
+   b_average /= b_all_cnt; // 적게 나온 평균
+   bs_average /= bs_all_cnt; // 적게 나온 평균(보너스 X)
+
    for (var i = 1; i <= 45; i++) {
       if (all_cnt[i] > all_special) {
          s_all_special_arr.push(i);
@@ -268,8 +283,13 @@ function myfunc(resp) {
             s += "<input class='ball50 ball' value='" + i + "'disabled>"
          }
       }
+      if (all_cnt[i] < b_average) {
+         s_b_all_arr.push(i);
+      }
+      if (cnt[i] < bs_average) {
+         s_bs_all_arr.push(i);
+      }
    }
-
    document.getElementById('all_out').innerHTML = all_p;
    document.getElementById('all_spe').innerHTML = all_s;
    document.getElementById('bonus_out').innerHTML = bonus_avge;
@@ -375,6 +395,28 @@ function random() {
             for (var j in lotto) {
                if (num == lotto[j]) {
                   num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "7": // 적게 나온 번호
+         for (var i = op_cnt; i < 6; i++) {
+            var num = s_b_all_arr[Math.floor(Math.random() * s_b_all_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = s_b_all_arr[Math.floor(Math.random() * s_b_all_arr.length)];
+               }
+            }
+            lotto.push(num);
+         }
+         break;
+      case "8": // 적게 나온 번호(보너스 X)
+         for (var i = op_cnt; i < 6; i++) {
+            var num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
+            for (var j in lotto) {
+               if (num == lotto[j]) {
+                  num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
                }
             }
             lotto.push(num);
