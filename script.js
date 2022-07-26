@@ -322,104 +322,143 @@ function random() {
       }
    }
 
+   var i = op_cnt;
+
    switch (select_op_val) {
       case "0": // 랜덤 추출
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = Math.floor(Math.random() * 44) + 1;
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = Math.floor(Math.random() * 44) + 1;
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if(bool){
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "1": // 평균보다 많이 나온 번호
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = all_arr[Math.floor(Math.random() * all_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = all_arr[Math.floor(Math.random() * all_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "2": // 평균보다 많이 나온 번호(보너스 X)
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = special_arr[Math.floor(Math.random() * special_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = special_arr[Math.floor(Math.random() * special_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "3": // 많이 나온 번호
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = s_all_special_arr[Math.floor(Math.random() * s_all_special_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = s_all_special_arr[Math.floor(Math.random() * s_all_special_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "4": // 많이 나온 번호(보너스 X)
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "5": // 평균보다 적게 나온 번호
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = b_all_arr[Math.floor(Math.random() * b_all_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = b_all_arr[Math.floor(Math.random() * b_all_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "6": // 평균보다 적게 나온 번호(보너스 X)
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "7": // 적게 나온 번호
-         for (var i = op_cnt; i < 6; i++) {
+         while (i < 6) {
             var num = s_b_all_arr[Math.floor(Math.random() * s_b_all_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = s_b_all_arr[Math.floor(Math.random() * s_b_all_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
       case "8": // 적게 나온 번호(보너스 X)
-         for (var i = op_cnt; i < 6; i++) {
+         console.log(s_bs_all_arr);
+         while (i < 6) {
             var num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
+            var bool = true;
             for (var j in lotto) {
                if (num == lotto[j]) {
-                  num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
+                  bool = false;
                }
             }
-            lotto.push(num);
+            if (bool) {
+               lotto.push(num);
+               i++;
+            }
          }
          break;
    }
