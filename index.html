@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOTTO 분석</title>
+  <title>LOTTO 번호 추출</title>
 </head>
 <!-- css -->
 <link rel="stylesheet" href="style.css">
@@ -15,8 +15,10 @@
 <link rel="shortcut icon" href="img/favicon.ico">
 
 <body>
-  <div id="all_out" style="margin-bottom: 30px;"></div>
-  <div id="temp" style="margin-bottom: 30px;"></div>
+  <p id="all_out_label" style='font-size: 1.3rem' onclick="all_out_toggle()">보너스 번호 포함 횟수보기</p>
+  <div id="all_out" style="margin-bottom: 30px; display: none;"></div>
+  <p style='font-size: 1.3rem; display: block;' onclick="temp_toggle()">보너스 번호 제외 횟수보기</p>
+  <div id="temp" style="margin-bottom: 30px; display: none;"></div>
   <div id="bonus_out" style="margin-bottom: 30px;"></div>
   <div id="all_avge_out" style="margin-bottom: 30px;"></div>
   <div id="avge_out" style="margin-bottom: 30px;"></div>

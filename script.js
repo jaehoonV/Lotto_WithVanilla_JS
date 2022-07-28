@@ -145,8 +145,8 @@ function myfunc(resp) {
    average /= 45;
    bonus_average /= 45;
 
-   var all_p = "<p style='font-size: 1.3rem'>보너스 번호 포함 횟수</p><br>";
-   var t = "<p style='font-size: 1.3rem'>보너스 번호 제외 횟수</p><br>";
+   var all_p = "<br>";
+   var t = "<br>";
    var all_avge = "평균보다 많이 나온 번호 : ";
 
    var avge_h = [];
@@ -334,7 +334,7 @@ function random() {
                   bool = false;
                }
             }
-            if(bool){
+            if (bool) {
                lotto.push(num);
                i++;
             }
@@ -446,7 +446,6 @@ function random() {
          }
          break;
       case "8": // 적게 나온 번호(보너스 X)
-         console.log(s_bs_all_arr);
          while (i < 6) {
             var num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
             var bool = true;
@@ -487,6 +486,24 @@ function history_toggle() {
       document.getElementById('demo').style.display = "block";
    } else {
       document.getElementById('demo').style.display = "none";
+   }
+}
+
+function all_out_toggle() {
+   var style = document.getElementById('all_out').style.display;
+   if (style == "none") {
+      document.getElementById('all_out').style.display = "block";
+   } else {
+      document.getElementById('all_out').style.display = "none";
+   }
+}
+
+function temp_toggle() {
+   var style = document.getElementById('temp').style.display;
+   if (style == "none") {
+      document.getElementById('temp').style.display = "block";
+   } else {
+      document.getElementById('temp').style.display = "none";
    }
 }
 
