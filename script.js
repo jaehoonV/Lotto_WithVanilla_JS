@@ -141,6 +141,35 @@ function myfunc(resp) {
       all_cnt[i] = cnt[i] + bonus_cnt[i];
    }
 
+   /* 통계 */
+   var st_map = new Map();
+   for (var i = 1; i <= 45; i++) {
+      st_map.set(i,all_cnt[i]);
+   }
+
+   const st_map_sort = new Map([...st_map.entries()].sort((a, b) => b[1] - a[1]));
+
+   st_map_sort.entries();
+   var st_p_cnt = 0;
+   var st_p = "<br>";
+
+   for (const [key, value] of st_map_sort) {
+      if (key <= 10) {
+         st_p += "<input class='ball10 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+      } else if (key <= 20) {
+         st_p += "<input class='ball20 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+      } else if (key <= 30) {
+         st_p += "<input class='ball30 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+      } else if (key <= 40) {
+         st_p += "<input class='ball40 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+      } else {
+         st_p += "<input class='ball50 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+      }
+      if(++st_p_cnt % 5 == 0){
+         st_p += "<br>";
+      }
+   } /* 통계 */
+
    all_average /= 45;
    average /= 45;
    bonus_average /= 45;
@@ -226,7 +255,7 @@ function myfunc(resp) {
             t += "<input class='ball50 ball' value='" + i + "'disabled>" + "<p class='ml_10'>" + cnt[i] + "번</p>";
          }
       }
-      if (i % 9 == 0) {
+      if (i % 5 == 0) {
          t += "<br>";
          all_p += "<br>";
       }
@@ -292,6 +321,7 @@ function myfunc(resp) {
    }
    document.getElementById('all_out').innerHTML = all_p;
    document.getElementById('all_spe').innerHTML = all_s;
+   document.getElementById('statistics').innerHTML = st_p;
    document.getElementById('bonus_out').innerHTML = bonus_avge;
    document.getElementById('all_avge_out').innerHTML = all_avge;
    document.getElementById('avge_out').innerHTML = avge;
@@ -504,6 +534,15 @@ function temp_toggle() {
       document.getElementById('temp').style.display = "block";
    } else {
       document.getElementById('temp').style.display = "none";
+   }
+}
+
+function statistics_toggle() {
+   var style = document.getElementById('statistics').style.display;
+   if (style == "none") {
+      document.getElementById('statistics').style.display = "block";
+   } else {
+      document.getElementById('statistics').style.display = "none";
    }
 }
 

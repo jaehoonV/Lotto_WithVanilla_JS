@@ -1,4 +1,7 @@
 [
+  {"round":1029,"num1":12,"num2":30,"num3":32,"num4":37,"num5":39,"num6":41,"numB":24,"prize1":2527848450,"prize1cnt":10,"prize2":67952916,"prize2cnt":62,"date":"2022.08.20"},
+  {"round":1028,"num1":5,"num2":7,"num3":12,"num4":13,"num5":18,"num6":35,"numB":23,"prize1":1181235132,"prize1cnt":20,"prize2":43268687,"prize2cnt":91,"date":"2022.08.13"},
+  {"round":1027,"num1":14,"num2":16,"num3":27,"num4":35,"num5":39,"num6":45,"numB":5,"prize1":2460504338,"prize1cnt":10,"prize2":49407718,"prize2cnt":83,"date":"2022.08.06"},
   {"round":1026,"num1":5,"num2":12,"num3":13,"num4":31,"num5":32,"num6":41,"numB":34,"prize1":1619118475,"prize1cnt":15,"prize2":53260477,"prize2cnt":76,"date":"2022.07.30"},
   {"round":1025,"num1":8,"num2":9,"num3":20,"num4":25,"num5":29,"num6":33,"numB":7,"prize1":6118853344,"prize1cnt":4,"prize2":59119356,"prize2cnt":69,"date":"2022.07.23"},
   {"round":1024,"num1":9,"num2":18,"num3":20,"num4":22,"num5":38,"num6":44,"numB":10,"prize1":3020323500,"prize1cnt":8,"prize2":63922191,"prize2cnt":63,"date":"2022.07.16"},
