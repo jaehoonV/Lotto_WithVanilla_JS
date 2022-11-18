@@ -137,6 +137,7 @@ p {
    margin: 10px auto;
    padding: 1%;
    border: 2px solid var(--button-bg-color);
+   border-radius: 10px;
 }
 
 #random {

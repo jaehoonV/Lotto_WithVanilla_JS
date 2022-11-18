@@ -12,6 +12,7 @@ xmlhttp.send();
 var cnt = new Array();
 var bonus_cnt = new Array();
 var all_cnt = new Array();
+var recently_cnt = new Array(); // 최근 10회차
 
 // 옵션에 사용할 Array
 var all_arr = new Array(); //평균보다 많이 나온 번호
@@ -27,10 +28,19 @@ for (var i = 1; i <= 45; i++) {
    cnt[i] = 0;
    bonus_cnt[i] = 0;
    all_cnt[i] = 0;
+   recently_cnt[i] = 0;
 }
 
 function myfunc(resp) {
    var arr = JSON.parse(resp);
+
+   /* 현재 회차 */
+   const now_round = arr[0].round;
+   /* 연달아 나올 확률 */
+   const total_cnt = 6 * 6 * (now_round - 1);
+   let dup_arr = [0, 0, 0, 0, 0, 0];
+   let dup_cnt = 0;
+
    var out = "<table>";
    out += "<tr>"
       + "<td style='width:50px;'>회차</td>"
@@ -49,6 +59,21 @@ function myfunc(resp) {
       + "</tr>"
 
    for (var i = 0; i < arr.length; i++) {
+      /* 연달아 나올 확률 */
+      if(dup_arr.includes(arr[i].num1)) dup_cnt++;
+      if(dup_arr.includes(arr[i].num2)) dup_cnt++;
+      if(dup_arr.includes(arr[i].num3)) dup_cnt++;
+      if(dup_arr.includes(arr[i].num4)) dup_cnt++;
+      if(dup_arr.includes(arr[i].num5)) dup_cnt++;
+      if(dup_arr.includes(arr[i].num6)) dup_cnt++;
+
+      dup_arr[0] = arr[i].num1;
+      dup_arr[1] = arr[i].num2;
+      dup_arr[2] = arr[i].num3;
+      dup_arr[3] = arr[i].num4;
+      dup_arr[4] = arr[i].num5;
+      dup_arr[5] = arr[i].num6;
+
       if (arr[i].prize1 > 2500000000 && arr[i].prize1 < 4500000000) {
          out +=
             "<tr class='boom'>" +
@@ -111,6 +136,16 @@ function myfunc(resp) {
       cnt[arr[i].num5]++;
       cnt[arr[i].num6]++;
       bonus_cnt[arr[i].numB]++;
+
+      /* 최근 10회차 통계 */
+      if(i < 10){
+         recently_cnt[arr[i].num1]++;
+         recently_cnt[arr[i].num2]++;
+         recently_cnt[arr[i].num3]++;
+         recently_cnt[arr[i].num4]++;
+         recently_cnt[arr[i].num5]++;
+         recently_cnt[arr[i].num6]++;
+     }
    }
    document.getElementById('demo').innerHTML = out;
    var average = 0;
@@ -143,11 +178,14 @@ function myfunc(resp) {
 
    /* 통계 */
    var st_map = new Map();
+   let recently_map = new Map();
    for (var i = 1; i <= 45; i++) {
       st_map.set(i,all_cnt[i]);
+      recently_map.set(i, recently_cnt[i]);
    }
 
    const st_map_sort = new Map([...st_map.entries()].sort((a, b) => b[1] - a[1]));
+   const recently_map_sort = new Map([...recently_map.entries()].sort((a, b) => b[1] - a[1]));
 
    st_map_sort.entries();
    var st_p_cnt = 0;
@@ -169,6 +207,24 @@ function myfunc(resp) {
          st_p += "<br>";
       }
    } /* 통계 */
+
+   var recently10 = "최근 10회차 통계 : ";
+   /* 최근 10회차 통계 */
+   for (const [key, value] of recently_map_sort) {
+        if (value != 0) {
+            if (key <= 10) {
+                recently10 += "<input class='ball10 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+            } else if (key <= 20) {
+                recently10 += "<input class='ball20 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+            } else if (key <= 30) {
+                recently10 += "<input class='ball30 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+            } else if (key <= 40) {
+                recently10 += "<input class='ball40 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+            } else {
+                recently10 += "<input class='ball50 ball' value='" + key + "'disabled>" + "<p class='ml_10'>" + value + "번</p>";
+            }
+        }
+   }
 
    all_average /= 45;
    average /= 45;
@@ -327,6 +383,8 @@ function myfunc(resp) {
    document.getElementById('avge_out').innerHTML = avge;
    document.getElementById('spe').innerHTML = s;
    document.getElementById('temp').innerHTML = t;
+   document.getElementById('dup_rate').innerHTML = "전 회차 당첨번호가 연달아 나올 확률 : " + Math.round(dup_cnt / total_cnt * 100000) / 1000 + "%";
+   document.getElementById('recently_10').innerHTML = recently10;
 }
 
 // 번호 추출
