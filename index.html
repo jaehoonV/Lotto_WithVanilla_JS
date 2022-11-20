@@ -1,68 +1,26 @@
 <!DOCTYPE html>
-<html lang="ko">
-
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>LOTTO 번호 추출</title>
+   <meta charset="UTF-8">
+   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+   <title>LOTTO 번호 추출</title>
+   <link rel="stylesheet" href="styles.css">
+   <script src="script.js" defer></script>
+   <link rel="shortcut icon" href="/img/favicon.ico">
 </head>
-<!-- css -->
-<link rel="stylesheet" href="style.css">
-<!-- js -->
-<script rel="script" src="script.js"></script>
-
-<link rel="shortcut icon" href="img/favicon.ico">
-
 <body>
-  <p id="all_out_label" style='font-size: 1.3rem' onclick="all_out_toggle()">보너스 번호 포함 횟수보기</p>
-  <div id="all_out" style="margin-bottom: 30px; display: none;"></div>
-  <p style='font-size: 1.3rem; display: block;' onclick="temp_toggle()">보너스 번호 제외 횟수보기</p>
-  <div id="temp" style="margin-bottom: 30px; display: none;"></div>
-  <p style='font-size: 1.3rem; display: block;' onclick="statistics_toggle()">번호 통계 내림차순 </p>
-  <div id="statistics" style="margin-bottom: 30px; display: none;"></div>
-  <div id="bonus_out" style="margin-bottom: 30px;"></div>
-  <div id="all_avge_out" style="margin-bottom: 30px;"></div>
-  <div id="avge_out" style="margin-bottom: 30px;"></div>
-  <div id="all_spe" style="margin-bottom: 30px;"></div>
-  <div id="spe" style="margin-bottom: 30px;"></div>
-  <div id="recently_10" style="margin-bottom: 30px;"></div>
-  <div id="dup_rate" style="margin-bottom: 30px;"></div>
-  <div id="machine">
-    <input id="random" value="" disabled>
-    <div id="num_machine" style="margin-bottom: 30px;">
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <button onclick="random()" class="button_css">번호 추출</button>
-      <button onclick="save_num()" class="button_css">저장</button>
-
-      <div class="box">
-        <div class="selectBox">
-          <button class="label">Select Option</button>
-          <input id="op_value" value="0" hidden>
-          <ul class="optionList">
-            <li class="optionItem" value=0>None</li>
-            <li class="optionItem" value=1>평균보다 많이 나온 번호</li>
-            <li class="optionItem" value=2>평균보다 많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=3>많이 나온 번호</li>
-            <li class="optionItem" value=4>많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=5>평균보다 적게 나온 번호</li>
-            <li class="optionItem" value=6>평균보다 많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=7>적게 나온 번호</li>
-            <li class="optionItem" value=8>적게 나온 번호(보너스 X)</li>
-          </ul>
-        </div>
+   <div class="login">
+      <h2 id="txt">Login</h2>
+      <div class="inputbox">
+         <input type="text" id="name" placeholder="UserName">
       </div>
-    </div>
-
-    <div id="save_box"></div>
-
-  </div>
-  <div><button onclick="history_toggle()" class="button_css" style="margin-bottom: 10px;">기록</button></div>
-  <div id="demo" style="display: none;"></div>
+      <div class="inputbox">
+         <input type="password" id="password" placeholder="Password">
+      </div>
+      <div class="inputbox">
+         <input type="submit" value="Login" id="btn">
+      </div>
+   </div>
 </body>
-
 </html>

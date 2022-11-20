@@ -1,0 +1,68 @@
+@import url("https://fonts.googleapis.com/css2?family=Ubuntu:wght@300;400;500;700;&display=swap");
+
+:root {
+    --bg_color: #287bff;
+    --ball10: #fbc400;
+    --ball20: #69c8f2;
+    --ball30: #ff7272;
+    --ball40: #aaa;
+    --ball50: #b0d840;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: var(--bg_color);
+    transition: 0.5s;
+}
+
+.login {
+    position: relative;
+    padding: 50px;
+    width: 400px;
+    background: #fff;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    box-shadow: 0 25px 50px rgba(0, 0, 0, 0.1);
+    border-radius: 15px;
+}
+
+.login h2 {
+    font-weight: 500;
+    border-left: 15px solid var(--bg_color);
+    line-height: 1em;
+    padding-left: 10px;
+    transition: 0.5s;
+    color: #333;
+}
+
+.login .inputbox input {
+    position: relative;
+    width: 100%;
+    padding: 10px 15px;
+    outline: none;
+    border: 2px solid #555;
+    font-size: 1em;
+    color: #333;
+    border-radius: 5px;
+}
+
+.login .inputbox input#btn {
+    border: none;
+    background: var(--bg_color);
+    color: #fff;
+    transition: 0.5s;
+    font-size: 1.1em;
+    font-weight: 500;
+    cursor: pointer;
+}
