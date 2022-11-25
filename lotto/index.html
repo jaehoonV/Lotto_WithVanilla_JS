@@ -10,7 +10,7 @@
 <!-- css -->
 <link rel="stylesheet" href="style.css">
 <!-- js -->
-<script rel="script" src="/script.js"></script>
+<script rel="script" src="script.js"></script>
 
 <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -56,6 +56,10 @@
           </ul>
         </div>
       </div>
+      <div class="except_num_box">
+        <span>제외번호</span>
+        <input id="except_num_input" placeholder="1,2,3,4,">
+      </div>
     </div>
 
     <div id="save_box"></div>
@@ -63,6 +67,7 @@
   </div>
   <div><button onclick="history_toggle()" class="button_css" style="margin-bottom: 10px;">기록</button></div>
   <div id="demo" style="display: none;"></div>
+  <div id="btn" style="display: none;"></div>
 </body>
 
 </html>
