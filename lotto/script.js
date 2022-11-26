@@ -387,15 +387,15 @@ function myfunc(resp) {
    document.getElementById('recently_10').innerHTML = recently10;
 }
 
+// 제외 번호
+let except_num_arr = [];
+
 // 번호 추출
 function random() {
    const select_op_val = document.getElementById('op_value').value;
    var lotto = [];
    var op_cnt = 0;
    var temp;
-   // 제외 번호
-   const except_val = document.getElementById('except_num_input').value;
-   let except_num_arr = except_val.split(",");
 
    // 번호 입력 처리
    For1: for (var i = 0; i < 5; i++) {
@@ -417,6 +417,7 @@ function random() {
 
    switch (select_op_val) {
       case "0": // 랜덤 추출
+         let err_cnt0 = 0;
          while (i < 6) {
             var num = Math.floor(Math.random() * 44) + 1;
             var bool = true;
@@ -434,9 +435,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt0++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "1": // 평균보다 많이 나온 번호
+         let err_cnt1 = 0;
          while (i < 6) {
             var num = all_arr[Math.floor(Math.random() * all_arr.length)];
             var bool = true;
@@ -454,9 +460,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt1++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "2": // 평균보다 많이 나온 번호(보너스 X)
+         let err_cnt2 = 0;
          while (i < 6) {
             var num = special_arr[Math.floor(Math.random() * special_arr.length)];
             var bool = true;
@@ -474,9 +485,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt2++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "3": // 많이 나온 번호
+         let err_cnt3 = 0;
          while (i < 6) {
             var num = s_all_special_arr[Math.floor(Math.random() * s_all_special_arr.length)];
             var bool = true;
@@ -494,9 +510,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt3++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "4": // 많이 나온 번호(보너스 X)
+         let err_cnt4 = 0;
          while (i < 6) {
             var num = s_special_arr[Math.floor(Math.random() * s_special_arr.length)];
             var bool = true;
@@ -514,9 +535,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt4++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "5": // 평균보다 적게 나온 번호
+         let err_cnt5 = 0;
          while (i < 6) {
             var num = b_all_arr[Math.floor(Math.random() * b_all_arr.length)];
             var bool = true;
@@ -534,9 +560,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt5++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "6": // 평균보다 적게 나온 번호(보너스 X)
+         let err_cnt6 = 0;
          while (i < 6) {
             var num = bs_all_arr[Math.floor(Math.random() * bs_all_arr.length)];
             var bool = true;
@@ -554,9 +585,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt6++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "7": // 적게 나온 번호
+         let err_cnt7 = 0;
          while (i < 6) {
             var num = s_b_all_arr[Math.floor(Math.random() * s_b_all_arr.length)];
             var bool = true;
@@ -574,9 +610,14 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt7++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
       case "8": // 적게 나온 번호(보너스 X)
+         let err_cnt8 = 0;
          while (i < 6) {
             var num = s_bs_all_arr[Math.floor(Math.random() * s_bs_all_arr.length)];
             var bool = true;
@@ -594,10 +635,13 @@ function random() {
                lotto.push(num);
                i++;
             }
+            if(err_cnt8++ > 100){
+               alert("조건을 다시 설정해주시기바랍니다.");
+               break;
+            }
          }
          break;
    }
-
 
    // 정렬
    lotto.sort(function (a, b) {
@@ -607,13 +651,20 @@ function random() {
    // 출력
    var l = "";
    for (var i = 0; i < 6; i++) {
-      if (i == 5) {
-         l += lotto[i];
-         break;
+      if (lotto[i] <= 10) {
+         l += "<input class='ball10 ball' value='" + lotto[i] + "'disabled>";
+      } else if (lotto[i] <= 20) {
+         l += "<input class='ball20 ball' value='" + lotto[i] + "'disabled>";
+      } else if (lotto[i] <= 30) {
+         l += "<input class='ball30 ball' value='" + lotto[i] + "'disabled>";
+      } else if (lotto[i] <= 40) {
+         l += "<input class='ball40 ball' value='" + lotto[i] + "'disabled>";
+      } else {
+         l += "<input class='ball50 ball' value='" + lotto[i] + "'disabled>";
       }
-      l += lotto[i] + "    ";
    }
-   document.getElementById('random').value = l;
+
+   document.getElementById('pick_num').innerHTML = l;
 }
 
 function history_toggle() {
@@ -655,7 +706,7 @@ function statistics_toggle() {
 function save_num() {
    const save_box = document.getElementById('save_box');
    newDiv = document.createElement("div");
-   newDiv.innerHTML = document.getElementById('random').value;
+   newDiv.innerHTML = document.getElementById('pick_num').innerHTML;
    save_box.appendChild(newDiv);
 }
 
@@ -679,5 +730,43 @@ window.onload = function () {
       } else {
          label.parentNode.classList.add('active');
       }
-   });
+   })
+}
+
+// 출력
+let ex_num_output = "";
+for (let ex = 1; ex < 46; ex++) {
+   if (ex <= 10) {
+      ex_num_output += "<input type='button' class='ball10 ball ex_num' value='" + ex + "'>";
+   } else if (ex <= 20) {
+      ex_num_output += "<input type='button' class='ball20 ball ex_num' value='" + ex + "'>";
+   } else if (ex <= 30) {
+      ex_num_output += "<input type='button' class='ball30 ball ex_num' value='" + ex + "'>";
+   } else if (ex <= 40) {
+      ex_num_output += "<input type='button' class='ball40 ball ex_num' value='" + ex + "'>";
+   } else {
+      ex_num_output += "<input type='button' class='ball50 ball ex_num' value='" + ex + "'>";
+   }
+}
+
+document.getElementById('except_num').innerHTML = ex_num_output;
+
+function ex_num(n){
+   console.log(n);
+}
+
+window.onload = function () {
+   const ex_num = document.querySelectorAll('.ex_num');
+
+   ex_num.forEach((target) => target.addEventListener('click', function () {
+      if(target.classList.contains('ex_active')){
+         target.classList.remove("ex_active");
+         except_num_arr = except_num_arr.filter((element) => element !== this.value);
+         except_num_input.value = except_num_arr;
+      } else{
+         target.classList.add("ex_active");
+         except_num_arr.push(this.value);
+         except_num_input.value = except_num_arr;
+      }
+   }));
 }

@@ -14,6 +14,7 @@
 
 html::-webkit-scrollbar {
    width: 9px;
+   height: 9px;
 }
 
 html::-webkit-scrollbar-button {
@@ -23,12 +24,12 @@ html::-webkit-scrollbar-button {
 html::-webkit-scrollbar-thumb {
    background: #999;
    border: 1px solid #999;
-   border-radius: 50px;
+   border-radius: 5px;
 }
 
 html::-webkit-scrollbar-track {
    background: transparent;
-   border-radius: 50px;
+   border-radius: 5px;
 }
 
 input, button {
@@ -40,6 +41,13 @@ input, button {
    border-radius: 0;
    -moz-appearance: none;
    -moz-border-radius: 0;
+}
+
+input[type="button"] {
+   appearance: none;
+   white-space: unset;
+   align-items: unset;
+   padding: 0;
 }
 
 td {
@@ -93,9 +101,21 @@ p {
    outline: 1px solid var(--button-bg-color);
 }
 
+.ex_num:hover {
+   animation: pulse2 1s;
+   box-shadow: 0 0 0 0.3em transparent;
+   outline: 1px solid #303030;
+}
+
 @keyframes pulse {
    0% {
       box-shadow: 0 0 0 0 var(--button-bg-color);
+   }
+}
+
+@keyframes pulse2 {
+   0% {
+      box-shadow: 0 0 0 0 #303030;
    }
 }
 
@@ -132,15 +152,20 @@ p {
    opacity: 0.5;
 }
 
-#machine {
-   width: 35rem;
-   margin: 10px auto;
+#machine,#except_num_box {
+   display: inline-block;
+   width: 32rem;
+   margin: 10px 10px;
    padding: 1%;
    border: 2px solid var(--button-bg-color);
    border-radius: 10px;
 }
 
-#random {
+#except_num_box{
+   position: absolute;
+}
+
+#pick_num {
    display: block;
    background-color: var(--button-bg-color);
    border: 1px solid var(--button-bg-color);
@@ -159,7 +184,7 @@ p {
 }
 
 #save_box {
-   width: 15rem;
+   width: 25rem;
    margin: 0px auto;
    font-size: 1.5rem;
    text-align: center;
@@ -300,12 +325,46 @@ p {
    border-bottom: 0 none;
 }
 
+#big_box{
+   margin: 0 auto;
+   width: 72rem;
+}
+
+#except_num_input{
+   border: 1px solid #ddd;
+   height: 2rem;
+   font-size: 1rem;
+   margin-bottom: 7px;
+   width: 25rem;
+}
+
+.ex_active{
+   outline: 2px solid black;
+}
+
+#except_num .ball{
+   margin: 8px 8px;
+}
+
+@media (max-width: 800px) {
+   #big_box{
+      width: 32rem;
+   }
+   #machine{
+      display: block;
+   }
+   #except_num_box{
+      display: block;
+      position: unset;
+   }
+}
+
 @media (max-width: 420px) {
-   #machine {
+   #machine, #except_num_box {
       width: 24rem;
    }
 
-   #random {
+   #pick_num {
       width: 23rem;
       font-size: 1.5rem;
    }
@@ -325,15 +384,10 @@ p {
    .ml_10 {
       font-size: 0.8rem;
    }
+
+   #machine, #except_num_box{
+      display: block;
+   }
 }
 
-.except_num_box{
-   width: 280px;
-   margin: 0 auto;
-}
 
-#except_num_input{
-   border: 1px solid #ddd;
-   height: 2rem;
-   font-size: 1rem;
-}

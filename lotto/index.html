@@ -10,7 +10,7 @@
 <!-- css -->
 <link rel="stylesheet" href="style.css">
 <!-- js -->
-<script rel="script" src="script.js"></script>
+<script rel="script" src="script.js" defer></script>
 
 <link rel="shortcut icon" href="/img/favicon.ico">
 
@@ -28,42 +28,43 @@
   <div id="spe" style="margin-bottom: 30px;"></div>
   <div id="recently_10" style="margin-bottom: 30px;"></div>
   <div id="dup_rate" style="margin-bottom: 30px;"></div>
-  <div id="machine">
-    <input id="random" value="" disabled>
-    <div id="num_machine" style="margin-bottom: 30px;">
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <input class="op_val input_wh33" maxlength=2>
-      <button onclick="random()" class="button_css">번호 추출</button>
-      <button onclick="save_num()" class="button_css">저장</button>
+  <div id="big_box">
+    <div id="machine">
+      <div id="pick_num"> </div>
+      <div id="num_machine" style="margin-bottom: 30px;">
+        <input class="op_val input_wh33" maxlength=2>
+        <input class="op_val input_wh33" maxlength=2>
+        <input class="op_val input_wh33" maxlength=2>
+        <input class="op_val input_wh33" maxlength=2>
+        <input class="op_val input_wh33" maxlength=2>
+        <button onclick="random()" class="button_css">번호 추출</button>
+        <button onclick="save_num()" class="button_css">저장</button>
 
-      <div class="box">
-        <div class="selectBox">
-          <button class="label">Select Option</button>
-          <input id="op_value" value="0" hidden>
-          <ul class="optionList">
-            <li class="optionItem" value=0>None</li>
-            <li class="optionItem" value=1>평균보다 많이 나온 번호</li>
-            <li class="optionItem" value=2>평균보다 많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=3>많이 나온 번호</li>
-            <li class="optionItem" value=4>많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=5>평균보다 적게 나온 번호</li>
-            <li class="optionItem" value=6>평균보다 많이 나온 번호(보너스 X)</li>
-            <li class="optionItem" value=7>적게 나온 번호</li>
-            <li class="optionItem" value=8>적게 나온 번호(보너스 X)</li>
-          </ul>
+        <div class="box">
+          <div class="selectBox">
+            <button class="label">Select Option</button>
+            <input id="op_value" value="0" hidden>
+            <ul class="optionList">
+              <li class="optionItem" value=0>None</li>
+              <li class="optionItem" value=1>평균보다 많이 나온 번호</li>
+              <li class="optionItem" value=2>평균보다 많이 나온 번호(보너스 X)</li>
+              <li class="optionItem" value=3>많이 나온 번호</li>
+              <li class="optionItem" value=4>많이 나온 번호(보너스 X)</li>
+              <li class="optionItem" value=5>평균보다 적게 나온 번호</li>
+              <li class="optionItem" value=6>평균보다 많이 나온 번호(보너스 X)</li>
+              <li class="optionItem" value=7>적게 나온 번호</li>
+              <li class="optionItem" value=8>적게 나온 번호(보너스 X)</li>
+            </ul>
+          </div>
         </div>
       </div>
-      <div class="except_num_box">
-        <span>제외번호</span>
-        <input id="except_num_input" placeholder="1,2,3,4,">
-      </div>
+      <div id="save_box"></div>
     </div>
-
-    <div id="save_box"></div>
-
+    <div id="except_num_box">
+      <span>제외번호 = </span>
+      <input id="except_num_input" placeholder="제외번호" disabled>
+      <div id="except_num"></div>
+    </div>
   </div>
   <div><button onclick="history_toggle()" class="button_css" style="margin-bottom: 10px;">기록</button></div>
   <div id="demo" style="display: none;"></div>
