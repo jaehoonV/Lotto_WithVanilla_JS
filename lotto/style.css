@@ -371,6 +371,7 @@ p {
 
    #pick_num {
       width: 23rem;
+      font-size: 2.2rem;
    }
 
    #num_machine {
@@ -399,7 +400,11 @@ p {
 
    #big_box {
       width: 25rem;
-  }
+   }
+
+   #save_box {
+      width: 20rem;
+   }
 }
 
 
