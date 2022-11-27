@@ -12,6 +12,10 @@
    --ball50: #b0d840;
 }
 
+body{
+   padding-bottom: 300px;
+}
+
 html::-webkit-scrollbar {
    width: 9px;
    height: 9px;
@@ -361,7 +365,8 @@ p {
 
 @media (max-width: 420px) {
    #machine, #except_num_box {
-      width: 24rem;
+      width: 23rem;
+      margin: 10px 0;
    }
 
    #pick_num {
@@ -388,6 +393,14 @@ p {
    #machine, #except_num_box{
       display: block;
    }
+
+   #except_num_input{
+      width: 20rem;
+   }
+
+   #big_box {
+      width: 25rem;
+  }
 }
 
 

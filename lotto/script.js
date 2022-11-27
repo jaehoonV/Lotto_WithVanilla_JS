@@ -714,7 +714,6 @@ function save_num() {
 window.onload = function () {
    const label = document.querySelector('.label');
    const options = document.querySelectorAll('.optionItem');
-
    const handleSelect = function (item) {
       document.getElementById('op_value').value = item.value;
       label.innerHTML = item.textContent;
@@ -731,6 +730,20 @@ window.onload = function () {
          label.parentNode.classList.add('active');
       }
    })
+
+   // 제외번호
+   const ex_num = document.querySelectorAll('.ex_num');
+   ex_num.forEach((target) => target.addEventListener('click', function () {
+      if(target.classList.contains('ex_active')){
+         target.classList.remove("ex_active");
+         except_num_arr = except_num_arr.filter((element) => element !== this.value);
+         except_num_input.value = except_num_arr;
+      } else{
+         target.classList.add("ex_active");
+         except_num_arr.push(this.value);
+         except_num_input.value = except_num_arr;
+      }
+   }));
 }
 
 // 출력
@@ -750,23 +763,3 @@ for (let ex = 1; ex < 46; ex++) {
 }
 
 document.getElementById('except_num').innerHTML = ex_num_output;
-
-function ex_num(n){
-   console.log(n);
-}
-
-window.onload = function () {
-   const ex_num = document.querySelectorAll('.ex_num');
-
-   ex_num.forEach((target) => target.addEventListener('click', function () {
-      if(target.classList.contains('ex_active')){
-         target.classList.remove("ex_active");
-         except_num_arr = except_num_arr.filter((element) => element !== this.value);
-         except_num_input.value = except_num_arr;
-      } else{
-         target.classList.add("ex_active");
-         except_num_arr.push(this.value);
-         except_num_input.value = except_num_arr;
-      }
-   }));
-}
